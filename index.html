@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harika Dunaka • Portfolio</title>
+  <meta name="description" content="Portfolio of Harika Dunaka — CSE student and aspiring full‑stack developer. Projects in web dev, AI/ML, and dashboards." />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --bg: #0b0c10;
+      --panel: #121318;
+      --text: #e8eaed;
+      --muted: #b8c0cc;
+      --brand: #7c5cff;
+      --brand-2: #00c2ff;
+      --border: #20232b;
+      --chip: #171923;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --section-gap: 72px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg: #f7f8fb;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --brand: #5b34ff;
+        --brand-2: #0099ff;
+        --border: #e5e7eb;
+        --chip: #f1f5f9;
+        --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+      }
+    }
+
+    /* ===== Base ===== */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(124,92,255,.25), transparent 60%),
+                  radial-gradient(900px 600px at -10% 10%, rgba(0,194,255,.2), transparent 60%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display:block; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* ===== Header / Nav ===== */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display:flex; align-items:center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+    .brand-dot { width:10px; height:10px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 30%, transparent); }
+    .nav a { opacity:.9; }
+    .nav-links { display:flex; gap: 20px; }
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; padding: 10px 14px; border-radius: 999px; border:1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 80%, transparent), var(--panel)); box-shadow: var(--shadow);
+      transition: transform .12s ease, background .25s ease, border-color .25s ease; font-weight: 600; color: var(--text);
+    }
+    .btn:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--brand) 35%, var(--border)); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: white; border: none; }
+
+    /* ===== Hero ===== */
+    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center; padding: 48px 0 36px; }
+    .card { background: var(--panel); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero .intro { padding: 28px; }
+    .kicker { display:inline-flex; align-items:center; gap:8px; font-size: 0.9rem; color: var(--muted); }
+    .kicker .pulse { width:8px; height:8px; border-radius:50%; background: var(--brand); box-shadow: 0 0 0 6px color-mix(in oklab, var(--brand) 30%, transparent); }
+    h1 { font-size: clamp(28px, 4vw, 44px); margin: 10px 0 8px; line-height:1.2; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; }
+    .cta { display:flex; gap:12px; margin-top: 18px; flex-wrap: wrap; }
+
+    .profile { padding: 0; overflow: hidden; }
+    .profile .banner { height: 140px; background: radial-gradient(600px 320px at 20% 0%, rgba(124,92,255,.5), transparent 60%),
+                                       radial-gradient(520px 280px at 100% 40%, rgba(0,194,255,.45), transparent 60%),
+                                       linear-gradient(180deg, color-mix(in oklab, var(--panel) 40%, transparent), var(--panel)); }
+    .profile .content { display:flex; flex-direction:column; align-items:center; padding: 64px 20px 24px; margin-top:-70px; }
+    .avatar { width:120px; height:120px; border-radius: 28px; border: 6px solid var(--panel); background: linear-gradient(135deg, var(--brand), var(--brand-2));
+              display:grid; place-items:center; font-weight:800; color:#fff; letter-spacing:1px; }
+    .profile h2 { margin: 14px 0 6px; }
+    .profile p { color: var(--muted); margin: 0; text-align:center; }
+
+    /* ===== Sections ===== */
+    section { padding: var(--section-gap) 0; }
+    .section-title { display:flex; align-items:center; gap:10px; margin-bottom: 18px; }
+    .section-title .bar { width: 8px; height: 24px; border-radius: 6px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); }
+    h3 { margin: 0; font-size: clamp(20px, 2.6vw, 28px); }
+    .muted { color: var(--muted); }
+
+    /* ===== Grids & Cards ===== */
+    .grid { display:grid; gap: 16px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px){ .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; } }
+
+    .tile { background: var(--panel); border:1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow); }
+    .tile h4 { margin: 0 0 6px; font-size: 1.05rem; }
+    .tile .meta { font-size: .9rem; color: var(--muted); margin-bottom: 8px; }
+    .tile ul { margin: 8px 0 0 18px; }
+
+    /* ===== Chips / Skills ===== */
+    .chips { display:flex; flex-wrap: wrap; gap: 10px; }
+    .chip { padding: 8px 12px; border:1px solid var(--border); background: var(--chip); border-radius: 999px; font-weight: 600; font-size: .95rem; }
+
+    /* ===== Timeline Style ===== */
+    .timeline { position: relative; padding-left: 18px; }
+    .timeline::before { content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background: color-mix(in oklab, var(--brand) 25%, var(--border)); border-radius: 2px; }
+    .t-item { position:relative; padding-left: 16px; margin-bottom: 14px; }
+    .t-item::before { content:""; position:absolute; left:-1px; top:10px; width:12px; height:12px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 30%, transparent); }
+
+    /* ===== Footer ===== */
+    footer { border-top:1px solid var(--border); padding: 28px 0 60px; color: var(--muted); }
+    .footer-grid { display:flex; flex-wrap: wrap; gap: 12px; align-items:center; justify-content: space-between; }
+    .tiny { font-size: .9rem; }
+
+    /* ===== Utilities ===== */
+    .spacer { height: 8px; }
+    .mb8 { margin-bottom: 8px; }
+    .mb12 { margin-bottom: 12px; }
+    .mb16 { margin-bottom: 16px; }
+    .mb24 { margin-bottom: 24px; }
+    .mb32 { margin-bottom: 32px; }
+    .center { text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="brand-dot"></span> Harika Dunaka</div>
+      <nav class="nav-links tiny">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certs">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn primary" href="mailto:harikacharan503@gmail.com">Hire Me</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="card intro">
+        <div class="kicker"><span class="pulse"></span> Final‑year CSE • Full‑Stack & AI Enthusiast</div>
+        <h1>Hi, I'm Harika — I build clean, user‑friendly web apps.</h1>
+        <p class="subtitle">Enthusiastic and detail‑oriented Computer Science student with a strong foundation in Python and web development. Proficient in HTML, CSS, JavaScript and familiar with Node.js & MongoDB. I love turning ideas into responsive, accessible interfaces.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="https://www.linkedin.com/in/harika-2025-dunaka" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
+      </div>
+      <aside class="card profile">
+        <div class="banner"></div>
+        <div class="content">
+          <div class="avatar" aria-label="Profile placeholder">HD</div>
+          <h2>Harika Dunaka</h2>
+          <p>Vijayawada, India · +91 81252 44265 · harikacharan503@gmail.com</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about">
+      <div class="section-title"><span class="bar"></span><h3>About</h3></div>
+      <div class="grid cols-2">
+        <div class="tile">
+          <h4>Career Objective</h4>
+          <p class="muted">Eager to apply technical skills and continue learning in a dynamic development environment to build innovative solutions.</p>
+        </div>
+        <div class="tile">
+          <h4>What I’m Into</h4>
+          <p class="muted">Web development, AI/ML fundamentals, building dashboards, and solving real‑world problems with clean UX.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills">
+      <div class="section-title"><span class="bar"></span><h3>Skills</h3></div>
+      <div class="tile">
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Computer Networks</span>
+          <span class="chip">Operating Systems</span>
+          <span class="chip">AI Fundamentals</span>
+          <span class="chip">ML Fundamentals</span>
+          <span class="chip">Power BI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section id="experience">
+      <div class="section-title"><span class="bar"></span><h3>Experience</h3></div>
+      <div class="grid cols-2">
+        <div class="tile">
+          <h4>Full Stack Java Intern · EXCELR</h4>
+          <div class="meta">Vijayawada · May 2025 — Jul 2025</div>
+          <ul>
+            <li>Built and optimized user‑friendly interfaces; worked across frontend & backend.</li>
+            <li>Integrated databases for efficient data flow and persistence.</li>
+            <li>Followed SDLC from design to deployment; strengthened debugging skills.</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <h4>Artificial Intelligence Intern · Aimer Society</h4>
+          <div class="meta">Vijayawada · Jan 2024 — Dec 2024</div>
+          <ul>
+            <li>Implemented YOLOv8 object detection; managed datasets with Roboflow.</li>
+            <li>Built Power BI visual dashboards and Telegram Q&A bots.</li>
+            <li>Explored vision & document models; delivered AI‑powered solutions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects">
+      <div class="section-title"><span class="bar"></span><h3>Projects</h3></div>
+      <div class="grid cols-3">
+        <article class="tile">
+          <h4>Object Detection with YOLOv8</h4>
+          <p class="muted">Real‑time detection for agriculture/medical use‑cases. Learned labeling, training, and deployment pipelines.</p>
+          <ul>
+            <li>Datasets managed with Roboflow</li>
+            <li>YOLO model training & evaluation</li>
+          </ul>
+        </article>
+        <article class="tile">
+          <h4>Interactive Sales Dashboard (Power BI)</h4>
+          <p class="muted">Visualized KPIs, regional trends, and performance insights using clean graphs and pie charts.</p>
+          <ul>
+            <li>Data cleaning & transformation</li>
+            <li>Actionable insights for stakeholders</li>
+          </ul>
+        </article>
+        <article class="tile">
+          <h4>User Login & Register UI</h4>
+          <p class="muted">Modern, responsive auth screens as part of learning full‑stack flows; ready for backend integration.</p>
+          <ul>
+            <li>HTML/CSS responsive forms</li>
+            <li>Accessible components</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Education ===== -->
+    <section id="education">
+      <div class="section-title"><span class="bar"></span><h3>Education</h3></div>
+      <div class="tile timeline">
+        <div class="t-item">
+          <strong>B.Tech — Computer Science & Engineering</strong>
+          <div class="muted">PSCMR College of Engineering & Tech, Vijayawada — 2022–2026</div>
+        </div>
+        <div class="t-item">
+          <strong>BIEAP</strong>
+          <div class="muted">Sri Chaitanya Jr College, Vijayawada — 2020–2022</div>
+        </div>
+        <div class="t-item">
+          <strong>SSC</strong>
+          <div class="muted">Sri Vidhyalaya E.M High School, Edupugallu — 2012–2020</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Certifications & Achievements ===== -->
+    <section id="certs">
+      <div class="section-title"><span class="bar"></span><h3>Certifications & Achievements</h3></div>
+      <div class="grid cols-2">
+        <div class="tile">
+          <h4>Certifications</h4>
+          <ul>
+            <li>SQL (Basic) — HackerRank (Feb 2025)</li>
+            <li>Python Programming — CodeTantra (Jan 2025)</li>
+            <li>Intro to Machine Learning — Infosys (Jul 2024)</li>
+            <li>Job Ready Employability Skills — Wadhwani Foundation (Sep 2024)</li>
+            <li>TCS iON Career Edge — TCS iON (Nov 2023)</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <h4>Awards</h4>
+          <ul>
+            <li>Merit Certificate: 1st in 2nd year B.Tech — CGPA 8.98</li>
+          </ul>
+          <h4 class="mb8">Activities</h4>
+          <ul>
+            <li>Cynosure 4.0 (KL University, 2022)</li>
+            <li>SPARDHA 2K24 (VVIT ACM, 2024)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Interests ===== -->
+    <section id="interests">
+      <div class="section-title"><span class="bar"></span><h3>Hobbies & Interests</h3></div>
+      <div class="tile">
+        <div class="chips">
+          <span class="chip">Hackathons</span>
+          <span class="chip">Drawing & Sketching</span>
+          <span class="chip">Travelling</span>
+          <span class="chip">Puzzles</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact">
+      <div class="section-title"><span class="bar"></span><h3>Contact</h3></div>
+      <div class="grid cols-2">
+        <div class="tile">
+          <h4>Let’s work together</h4>
+          <p class="muted">Have an opportunity or collaboration in mind? I’m open to internships and entry‑level full‑stack roles.</p>
+          <div class="chips">
+            <a class="chip" href="mailto:harikacharan503@gmail.com">Email</a>
+            <a class="chip" href="tel:+918125244265">Call</a>
+            <a class="chip" href="https://www.linkedin.com/in/harika-2025-dunaka" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+        <div class="tile">
+          <h4>Location</h4>
+          <p class="muted">Vijayawada, India · Open to remote</p>
+          <h4 class="mb8">Resume</h4>
+          <p class="muted">Request an updated resume via email.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="tiny">© <span id="y"></span> Harika Dunaka</div>
+      <div class="tiny">Built with HTML & CSS — responsive & accessible</div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer without any library
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
